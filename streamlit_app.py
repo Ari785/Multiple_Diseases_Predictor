@@ -337,8 +337,8 @@ if selected == "Parkinson Prediction":
                 display_result("The person does not have Parkinson's disease", False)
         except Exception as e:
             st.error(f"Error in Parkinson's Prediction: {e}")
-# Sidebar option for Breast Cancer Classification
-  if selected == 'Breast Cancer Prediction':
+# Breast Cancer Prediction Page
+if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
 
     with st.expander("Click for Input Information"):
@@ -420,4 +420,5 @@ if selected == "Parkinson Prediction":
         except Exception as e:
             st.error(f"Error in Breast Cancer Prediction: {e}")
 
+          
 
