@@ -1,13 +1,13 @@
-# 📦 Streamlit App Starter Kit 
+# 👨‍⚕️ Multiple_Disease_Predictor
 ```
-⬆️ (Replace above with your app's name)
+This a app for predicting multiple diseases.
 ```
 
 Description of the app ...
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://multiple_disease_predictor.streamlit.app/)
 
 ## GitHub Codespaces
 
