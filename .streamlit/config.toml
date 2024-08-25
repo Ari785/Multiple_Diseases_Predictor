@@ -1,7 +1,5 @@
 [theme]
-primaryColor = "#32CD32"  # Lime green
-backgroundColor = "#000080"  # Navy blue
-secondaryBackgroundColor = "#FFFFFF"  # White
-textColor = "#FFFFFF"  # White
-font = "sans serif"
-
+primaryColor="#32cd32"
+backgroundColor="#000000"
+secondaryBackgroundColor="#000000"
+textColor="#ffffff"
