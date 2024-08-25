@@ -1,9 +1,10 @@
-streamlit==1.27.2      
+streamlit     
 setuptools
 streamlit_option_menu
 scikit-learn
 pandas
 numpy
-svm
 tensorflow 
 keras
+svm
+
