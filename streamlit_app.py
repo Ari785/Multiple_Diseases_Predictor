@@ -92,15 +92,6 @@ def parse_bulk_input(bulk_input):
     except ValueError as e:
         st.error(f"Error parsing bulk input: {e}")
         return [None] * 8
-
-def display_result(message, is_positive):
-    if is_positive:
-        st.markdown(f'<div style="color: red; font-size: 20px;">{message}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div style="color: green; font-size: 20px;">{message}</div>', unsafe_allow_html=True)
-
-
-
 if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction')
 
