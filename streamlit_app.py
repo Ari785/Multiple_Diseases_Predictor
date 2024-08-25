@@ -383,57 +383,91 @@ if selected == 'Breast Cancer Prediction':
         - **Perimeter Mean**: Mean size of the core tumor.
         - **Area Mean**: Mean area of the tumor.
         - **Smoothness Mean**: Mean of local variation in radius lengths.
-        - **Compactness Mean**: Mean of perimeter^2/ area - 1.0.
+        - **Compactness Mean**: Mean of perimeter^2 / area - 1.0.
         - **Concavity Mean**: Mean of severity of concave portions of the contour.
         - **Concave Points Mean**: Mean of number of concave portions of the contour.
         - **Symmetry Mean**: Mean symmetry.
         - **Fractal Dimension Mean**: Mean for "coastline approximation" - 1.
+        - **Radius SE**: Standard error of distances from center to points on the perimeter.
+        - **Texture SE**: Standard error of gray-scale values.
+        - **Perimeter SE**: Standard error of the core tumor perimeter.
+        - **Area SE**: Standard error of the tumor area.
+        - **Smoothness SE**: Standard error of local variation in radius lengths.
+        - **Compactness SE**: Standard error of perimeter^2 / area - 1.0.
+        - **Concavity SE**: Standard error of severity of concave portions of the contour.
+        - **Concave Points SE**: Standard error of number of concave portions of the contour.
+        - **Symmetry SE**: Standard error of symmetry.
+        - **Fractal Dimension SE**: Standard error for "coastline approximation" - 1.
+        - **Radius Worst**: "Worst" or largest mean value for radius.
+        - **Texture Worst**: "Worst" or largest mean value for texture.
+        - **Perimeter Worst**: "Worst" or largest mean value for perimeter.
+        - **Area Worst**: "Worst" or largest mean value for area.
+        - **Smoothness Worst**: "Worst" or largest mean value for smoothness.
+        - **Compactness Worst**: "Worst" or largest mean value for compactness.
+        - **Concavity Worst**: "Worst" or largest mean value for concavity.
+        - **Concave Points Worst**: "Worst" or largest mean value for concave points.
+        - **Symmetry Worst**: "Worst" or largest mean value for symmetry.
+        - **Fractal Dimension Worst**: "Worst" or largest mean value for fractal dimension.
         """)
 
     bulk_input = st.text_area("Paste all inputs here (space-separated values):", "")
     if bulk_input:
-        inputs = auto_fill_inputs(bulk_input, 10)
+        inputs = auto_fill_inputs(bulk_input, 30)
     else:
-        inputs = [""] * 10
+        inputs = [""] * 30
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
         radius_mean = st.text_input('Radius Mean', inputs[0])
-
-    with col2:
         texture_mean = st.text_input('Texture Mean', inputs[1])
-
-    with col3:
         perimeter_mean = st.text_input('Perimeter Mean', inputs[2])
-
-    with col1:
         area_mean = st.text_input('Area Mean', inputs[3])
-
-    with col2:
         smoothness_mean = st.text_input('Smoothness Mean', inputs[4])
-
-    with col3:
         compactness_mean = st.text_input('Compactness Mean', inputs[5])
-
-    with col1:
         concavity_mean = st.text_input('Concavity Mean', inputs[6])
+        concave_points_mean = st.text_input('Concave Points Mean', inputs[7])
+        symmetry_mean = st.text_input('Symmetry Mean', inputs[8])
+        fractal_dimension_mean = st.text_input('Fractal Dimension Mean', inputs[9])
 
     with col2:
-        concave_points_mean = st.text_input('Concave Points Mean', inputs[7])
+        radius_se = st.text_input('Radius SE', inputs[10])
+        texture_se = st.text_input('Texture SE', inputs[11])
+        perimeter_se = st.text_input('Perimeter SE', inputs[12])
+        area_se = st.text_input('Area SE', inputs[13])
+        smoothness_se = st.text_input('Smoothness SE', inputs[14])
+        compactness_se = st.text_input('Compactness SE', inputs[15])
+        concavity_se = st.text_input('Concavity SE', inputs[16])
+        concave_points_se = st.text_input('Concave Points SE', inputs[17])
+        symmetry_se = st.text_input('Symmetry SE', inputs[18])
+        fractal_dimension_se = st.text_input('Fractal Dimension SE', inputs[19])
 
     with col3:
-        symmetry_mean = st.text_input('Symmetry Mean', inputs[8])
-
-    with col1:
-        fractal_dimension_mean = st.text_input('Fractal Dimension Mean', inputs[9])
+        radius_worst = st.text_input('Radius Worst', inputs[20])
+        texture_worst = st.text_input('Texture Worst', inputs[21])
+        perimeter_worst = st.text_input('Perimeter Worst', inputs[22])
+        area_worst = st.text_input('Area Worst', inputs[23])
+        smoothness_worst = st.text_input('Smoothness Worst', inputs[24])
+        compactness_worst = st.text_input('Compactness Worst', inputs[25])
+        concavity_worst = st.text_input('Concavity Worst', inputs[26])
+        concave_points_worst = st.text_input('Concave Points Worst', inputs[27])
+        symmetry_worst = st.text_input('Symmetry Worst', inputs[28])
+        fractal_dimension_worst = st.text_input('Fractal Dimension Worst', inputs[29])
 
     # Code for Prediction
     if st.button('Breast Cancer Test Result'):
         try:
-            user_input = [radius_mean, texture_mean, perimeter_mean, area_mean,
-                          smoothness_mean, compactness_mean, concavity_mean,
-                          concave_points_mean, symmetry_mean, fractal_dimension_mean]
+            user_input = [
+                radius_mean, texture_mean, perimeter_mean, area_mean,
+                smoothness_mean, compactness_mean, concavity_mean,
+                concave_points_mean, symmetry_mean, fractal_dimension_mean,
+                radius_se, texture_se, perimeter_se, area_se,
+                smoothness_se, compactness_se, concavity_se,
+                concave_points_se, symmetry_se, fractal_dimension_se,
+                radius_worst, texture_worst, perimeter_worst, area_worst,
+                smoothness_worst, compactness_worst, concavity_worst,
+                concave_points_worst, symmetry_worst, fractal_dimension_worst
+            ]
             user_input = [float(x) for x in user_input]
 
             cancer_prediction = breast_cancer_model.predict([user_input])
@@ -444,6 +478,7 @@ if selected == 'Breast Cancer Prediction':
                 display_result('The tumor is benign', False)
         except Exception as e:
             st.error(f"Error in Breast Cancer Prediction: {e}")
+
 
           
 
