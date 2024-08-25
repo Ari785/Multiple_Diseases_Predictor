@@ -90,7 +90,7 @@ def auto_fill_inputs(input_data, num_inputs):
 # Diabetes Prediction Page
 if selected == 'Diabetes Prediction':
     
-    st.title('Diabetes Prediction')
+    st.title('💉Diabetes Prediction')
     
     with st.expander("Learn more about the input features"):
         st.write("""
@@ -155,7 +155,7 @@ if selected == 'Diabetes Prediction':
 
 # Heart Disease Prediction Page
 if selected == 'Heart Diseases Prediction':
-    st.title('Heart Disease Prediction')
+    st.title('🫀Heart Disease Prediction')
     
     with st.expander("Learn more about the input features"):
        st.write("""
@@ -252,7 +252,7 @@ if selected == 'Heart Diseases Prediction':
 
 # Parkinson's Prediction Page
 if selected == "Parkinson Prediction":
-    st.title("Parkinson's Disease Prediction")
+    st.title("🩺Parkinson's Disease Prediction")
 
     with st.expander("Learn more about the input features"):
        st.write("""
@@ -373,7 +373,7 @@ if selected == "Parkinson Prediction":
 # Breast Cancer Prediction Page
 if selected == 'Breast Cancer Prediction':
     
-    st.title('Breast Cancer Prediction')
+    st.title('🧬Breast Cancer Prediction')
     
     with st.expander("Learn more about the input features"):
         st.write("""
