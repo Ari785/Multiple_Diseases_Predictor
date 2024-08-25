@@ -1,9 +1,9 @@
-streamlit==1.27.2
+streamlit==1.27.2      
 setuptools
 streamlit_option_menu
 scikit-learn
 pandas
 numpy
-tensorflow
-keras
 svm
+tensorflow==2.13.0  
+keras==2.13.0 
