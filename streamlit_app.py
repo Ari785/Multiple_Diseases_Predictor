@@ -340,8 +340,7 @@ if selected == "Parkinson Prediction":
 # Breast Cancer Prediction Page
 if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
-
-with st.expander("Learn more about the features used in the prediction"):
+    with st.expander("Learn more about the features used in the prediction"):
     st.write("""
     ### Mean Features:
     - **Mean Radius**: The average distance from the center to points on the perimeter of the cell nuclei.
@@ -379,7 +378,6 @@ with st.expander("Learn more about the features used in the prediction"):
     - **Worst Symmetry**: The largest asymmetry observed.
     - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
     """)
-
 
     # Input fields in 5 columns
     col1, col2, col3, col4, col5 = st.columns(5)
