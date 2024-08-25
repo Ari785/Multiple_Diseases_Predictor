@@ -49,7 +49,7 @@ st.markdown(
 
 # Load the saved models
 try:
-    diabetes_model = pickle.load(open("https://github.com/Ari785/Multiple_Diseases_Predictor/blob/fa1b02b32250568f2397c339b14abe14b6bad415/saved%20models/diabetes_model.sav", 'rb'))
+    diabetes_model = pickle.load(open("https://github.com/Ari785/Multiple_Diseases_Predictor/blob/cb1b1f2b0b61ad1099d8ceb8f52aba986fc334ae/saved%20models/diabetes_model.sav", 'rb'))
     heart_disease_model = pickle.load(open("https://github.com/Ari785/Multiple_Diseases_Predictor/blob/2583f664c0fddace0e64659bf365e815e8b538bb/saved%20models/heart_disease_model.sav", 'rb'))
     parkinsons_model = pickle.load(open("https://github.com/Ari785/Multiple_Diseases_Predictor/blob/fa1b02b32250568f2397c339b14abe14b6bad415/saved%20models/parkinsons_model.sav", 'rb'))
     
