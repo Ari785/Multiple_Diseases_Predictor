@@ -211,45 +211,41 @@ if selected == 'Heart Diseases Prediction':
     if bulk_input:
         values = parse_bulk_input(bulk_input, num_values)
   
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
+col1, col2, col3 = st.columns(3)
+with col1:
     age = st.text_input('Age', value=str(values[0]))
-
-    with col2:
+with col2:
     sex = st.text_input('Sex', value=str(values[1]))
-
-    with col3:
+with col3:
     cp = st.text_input('Chest Pain types', value=str(values[2]))
 
-    with col1:
+with col1:
     trestbps = st.text_input('Resting Blood Pressure', value=str(values[3]))
 
-    with col2:
+with col2:
     chol = st.text_input('Serum Cholestoral in mg/dl', value=str(values[4]))
 
-    with col3:
+with col3:
     fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl', value=str(values[5]))
-
-    with col1:
+with col1:
     restecg = st.text_input('Resting Electrocardiographic results', value=str(values[6]))
 
-    with col2:
+with col2:
     thalach = st.text_input('Maximum Heart Rate achieved', value=str(values[7]))
 
-    with col3:
+with col3:
     exang = st.text_input('Exercise Induced Angina', value=str(values[8]))
 
-    with col1:
+with col1:
     oldpeak = st.text_input('ST depression induced by exercise', value=str(values[9]))
 
-    with col2:
+with col2:
     slope = st.text_input('Slope of the peak exercise ST segment', value=str(values[10]))
 
-    with col3:
+with col3:
     ca = st.text_input('Major vessels colored by fluoroscopy', value=str(values[11]))
 
-    with col1:
+with col1:
     thal = st.text_input('thal', value=str(values[12]))
     # Code for Prediction
     if st.button('Heart Disease Test Result'):
