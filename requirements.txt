@@ -6,7 +6,4 @@ scikit-learn
 svm
 tensorflow
 keras
-git add requirements.txt
-git commit -m "Fix missing distutils issue"
-git push
-
+pickle5
