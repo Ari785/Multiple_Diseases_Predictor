@@ -52,6 +52,7 @@ try:
     diabetes_model = pickle.load(open("saved models/diabetes_model.sav", 'rb'))
     heart_disease_model = pickle.load(open("saved models/heart_disease_model.sav", 'rb'))
     parkinsons_model = pickle.load(open("saved models/parkinsons_model.sav", 'rb'))
+    breast_cancer_model = pickle.load(open("saved models/breast_cancer_model.sav", 'rb'))
     
 except Exception as e:
     st.error(f"Error loading models: {e}")
@@ -61,7 +62,8 @@ with st.sidebar:
     selected = option_menu('Multiple Disease Predictor',
                            ['Diabetes Prediction',
                             'Heart Diseases Prediction',
-                            'Parkinson Prediction'],
+                            'Parkinson Prediction',
+                           'Breast Cancer Prediction'],
                            menu_icon='hospital-fill',
                            icons=['activity', 'heart', 'person'],
                            default_index=0)
@@ -335,3 +337,70 @@ if selected == "Parkinson Prediction":
                 display_result("The person does not have Parkinson's disease", False)
         except Exception as e:
             st.error(f"Error in Parkinson's Prediction: {e}")
+
+# Sidebar option for Breast Cancer Classification
+if selected == 'Breast Cancer Prediction':
+    st.title("Breast Cancer Prediction")
+
+    with st.expander("Click for Input Information"):
+        st.write("""
+        **Input Information:**
+        - **mean radius**
+        - **mean texture**
+        - **mean perimeter**
+        - **mean area**
+        - **mean smoothness**
+        - **mean compactness**
+        - **mean concavity**
+        - **mean concave points**
+        - **mean symmetry**
+        - **mean fractal dimension**
+        - **radius error**
+        - **texture error**
+        - **perimeter error**
+        - **area error**
+        - **smoothness error**
+        - **compactness error**
+        - **concavity error**
+        - **concave points error**
+        - **symmetry error**
+        - **fractal dimension error**
+        - **worst radius**
+        - **worst texture**
+        - **worst perimeter**
+        - **worst area**
+        - **worst smoothness**
+        - **worst compactness**
+        - **worst concavity**
+        - **worst concave points**
+        - **worst symmetry**
+        - **worst fractal dimension**
+        """)
+
+    # Input fields
+    input_fields = ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness',
+                    'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry',
+                    'mean fractal dimension', 'radius error', 'texture error', 'perimeter error',
+                    'area error', 'smoothness error', 'compactness error', 'concavity error',
+                    'concave points error', 'symmetry error', 'fractal dimension error',
+                    'worst radius', 'worst texture', 'worst perimeter', 'worst area',
+                    'worst smoothness', 'worst compactness', 'worst concavity',
+                    'worst concave points', 'worst symmetry', 'worst fractal dimension']
+
+    user_input = []
+
+    for field in input_fields:
+        user_input.append(st.text_input(field))
+
+    # Prediction
+    if st.button("Breast Cancer Test Result"):
+        try:
+            user_input = [float(x) for x in user_input]
+            breast_cancer_prediction = breast_cancer_model.predict([user_input])
+
+            if breast_cancer_prediction[0] == 1:
+                display_result('The tumor is Malignant (Cancerous)', True)
+            else:
+                display_result('The tumor is Benign (Non-Cancerous)', False)
+        except Exception as e:
+            st.error(f"Error in Breast Cancer Prediction: {e}")
