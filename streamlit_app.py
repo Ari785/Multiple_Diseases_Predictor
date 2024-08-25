@@ -83,12 +83,27 @@ def display_result(message, is_positive):
             </div>
         """, unsafe_allow_html=True)
 
-# Diabetes Prediction Page
+def parse_bulk_input(bulk_input):
+    try:
+        values = [float(x) for x in bulk_input.split(',')]
+        if len(values) != 8:
+            raise ValueError("Incorrect number of values provided.")
+        return values
+    except ValueError as e:
+        st.error(f"Error parsing bulk input: {e}")
+        return [None] * 8
+
+def display_result(message, is_positive):
+    if is_positive:
+        st.markdown(f'<div style="color: red; font-size: 20px;">{message}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<div style="color: green; font-size: 20px;">{message}</div>', unsafe_allow_html=True)
+
+selected = st.sidebar.radio("Select a prediction", ["Diabetes Prediction", "Heart Disease Prediction", "Parkinson's Disease Prediction", "Breast Cancer Prediction"])
+
 if selected == 'Diabetes Prediction':
-    
     st.title('Diabetes Prediction')
-    
-    
+
     with st.expander("Learn more about the input features"):
         st.write("""
         **Input Information:**
@@ -102,32 +117,42 @@ if selected == 'Diabetes Prediction':
         - **Age**: Age of the person in years.
         """)
 
-    # Getting the input data from the user
+    # Text area for bulk input
+    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+
+    # Default values for demonstration
+    default_values = ['0', '0', '0', '0', '0', '0', '0', '0']
+
+    # Initialize input fields
+    values = default_values
+    if bulk_input:
+        values = parse_bulk_input(bulk_input)
+    
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        Pregnancies = st.text_input('Number of Pregnancies')
+        Pregnancies = st.text_input('Number of Pregnancies', value=str(values[0]))
 
     with col2:
-        Glucose = st.text_input('Glucose Level')
+        Glucose = st.text_input('Glucose Level', value=str(values[1]))
 
     with col3:
-        BloodPressure = st.text_input('Blood Pressure value')
+        BloodPressure = st.text_input('Blood Pressure value', value=str(values[2]))
 
     with col1:
-        SkinThickness = st.text_input('Skin Thickness value')
+        SkinThickness = st.text_input('Skin Thickness value', value=str(values[3]))
 
     with col2:
-        Insulin = st.text_input('Insulin Level')
+        Insulin = st.text_input('Insulin Level', value=str(values[4]))
 
     with col3:
-        BMI = st.text_input('BMI value')
+        BMI = st.text_input('BMI value', value=str(values[5]))
 
     with col1:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
+        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value', value=str(values[6]))
 
     with col2:
-        Age = st.text_input('Age of the Person')
+        Age = st.text_input('Age of the Person', value=str(values[7]))
 
     # Code for Prediction
     if st.button('Diabetes Test Result'):
