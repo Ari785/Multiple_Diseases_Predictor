@@ -65,7 +65,7 @@ with st.sidebar:
                             'Parkinson Prediction',
                            'Breast Cancer Prediction'],
                            menu_icon='hospital-fill',
-                           icons=['activity', 'heart', 'person','person'],
+                           icons=['activity', 'heart', 'person','Virus'],
                            default_index=0)
 
 # Helper function to display the result
