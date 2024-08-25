@@ -213,7 +213,9 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
-   handle_prediction(13, heart_disease_model, input_labels)
+      
+    handle_prediction(13, heart_disease_model, input_labels)
+  
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -287,7 +289,9 @@ if selected == "Parkinson Prediction":
         - **DFA**: Signal fractal scaling exponent.
         - **spread1**, **spread2**, **PPE**: Nonlinear measures of fundamental frequency variation.
         """)
+      
     handle_prediction(22, parkinsons_model, input_labels)
+  
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
@@ -412,7 +416,8 @@ if selected == 'Breast Cancer Prediction':
     - **Worst Symmetry**: The largest asymmetry observed.
     - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
     """)
-
+      
+    handle_prediction(30, breast_cancer_model, input_labels)
     # Input fields in 5 columns
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -426,7 +431,7 @@ if selected == 'Breast Cancer Prediction':
         'worst smoothness', 'worst compactness', 'worst concavity',
         'worst concave points', 'worst symmetry', 'worst fractal dimension'
     ]
-     handle_prediction(30, breast_cancer_model, input_labels)
+    
     user_input = []
 
     for i, label in enumerate(input_labels):
