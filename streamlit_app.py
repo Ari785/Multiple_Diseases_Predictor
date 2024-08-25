@@ -89,7 +89,7 @@ if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction')
     
     
-    with st.expander("Click for Input Information"):
+    with st.expander("Learn more about the input features"):
         st.write("""
         **Input Information:**
         - **Pregnancies**: Number of times pregnant.
@@ -149,7 +149,7 @@ if selected == 'Diabetes Prediction':
 if selected == 'Heart Diseases Prediction':
     st.title('Heart Disease Prediction')
     
-    with st.expander("Click for Input Information"):
+    with st.expander("Learn more about the input features"):
        st.write("""
        **Input Information:**
        - **Age**: Age of the patient in years.
@@ -240,7 +240,7 @@ if selected == 'Heart Diseases Prediction':
 if selected == "Parkinson Prediction":
     st.title("Parkinson's Disease Prediction")
     
-    with st.expander("Click for Input Information"):
+    with st.expander("Learn more about the input features"):
         st.write("""
         **Input Information:**
         - **MDVP:Fo(Hz)**: Average vocal fundamental frequency.
@@ -340,7 +340,7 @@ if selected == "Parkinson Prediction":
 # Breast Cancer Prediction Page
 if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
-    with st.expander("Learn more about the features used in the prediction"):
+    with st.expander("Learn more about the input features"):
          st.write("""
     ### Mean Features:
     - **Mean Radius**: The average distance from the center to points on the perimeter of the cell nuclei.
