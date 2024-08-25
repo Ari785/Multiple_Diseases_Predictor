@@ -214,44 +214,43 @@ if selected == 'Heart Diseases Prediction':
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.text_input('Age')
+    age = st.text_input('Age', value=str(values[0]))
 
     with col2:
-        sex = st.text_input('Sex')
+    sex = st.text_input('Sex', value=str(values[1]))
 
     with col3:
-        cp = st.text_input('Chest Pain types')
+    cp = st.text_input('Chest Pain types', value=str(values[2]))
 
     with col1:
-        trestbps = st.text_input('Resting Blood Pressure')
+    trestbps = st.text_input('Resting Blood Pressure', value=str(values[3]))
 
     with col2:
-        chol = st.text_input('Serum Cholestoral in mg/dl')
+    chol = st.text_input('Serum Cholestoral in mg/dl', value=str(values[4]))
 
     with col3:
-        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl')
+    fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl', value=str(values[5]))
 
     with col1:
-        restecg = st.text_input('Resting Electrocardiographic results')
+    restecg = st.text_input('Resting Electrocardiographic results', value=str(values[6]))
 
     with col2:
-        thalach = st.text_input('Maximum Heart Rate achieved')
+    thalach = st.text_input('Maximum Heart Rate achieved', value=str(values[7]))
 
     with col3:
-        exang = st.text_input('Exercise Induced Angina')
+    exang = st.text_input('Exercise Induced Angina', value=str(values[8]))
 
     with col1:
-        oldpeak = st.text_input('ST depression induced by exercise')
+    oldpeak = st.text_input('ST depression induced by exercise', value=str(values[9]))
 
     with col2:
-        slope = st.text_input('Slope of the peak exercise ST segment')
+    slope = st.text_input('Slope of the peak exercise ST segment', value=str(values[10]))
 
     with col3:
-        ca = st.text_input('Major vessels colored by flourosopy')
+    ca = st.text_input('Major vessels colored by fluoroscopy', value=str(values[11]))
 
     with col1:
-        thal = st.text_input('thal')
-
+    thal = st.text_input('thal', value=str(values[12]))
     # Code for Prediction
     if st.button('Heart Disease Test Result'):
         try:
@@ -297,74 +296,77 @@ if selected == "Parkinson Prediction":
     values = default_values
     if bulk_input:
         values = parse_bulk_input(bulk_input, num_values)
+
+# Input fields in 5 columns
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col1:
+    fo = st.text_input("MDVP:Fo(Hz)", value=str(values[0]))
+
+with col2:
+    fhi = st.text_input("MDVP:Fhi(Hz)", value=str(values[1]))
+
+with col3:
+    flo = st.text_input("MDVP:Flo(Hz)", value=str(values[2]))
+
+with col4:
+    Jitter_percent = st.text_input("MDVP:Jitter(%)", value=str(values[3]))
+
+with col5:
+    Jitter_Abs = st.text_input("MDVP:Jitter(Abs)", value=str(values[4]))
+
+with col1:
+    RAP = st.text_input("MDVP:RAP", value=str(values[5]))
+
+with col2:
+    PPQ = st.text_input("MDVP:PPQ", value=str(values[6]))
+
+with col3:
+    DDP = st.text_input("Jitter:DDP", value=str(values[7]))
+
+with col4:
+    Shimmer = st.text_input("MDVP:Shimmer", value=str(values[8]))
+
+with col5:
+    Shimmer_dB = st.text_input("MDVP:Shimmer(dB)", value=str(values[9]))
+
+with col1:
+    APQ3 = st.text_input("Shimmer:APQ3", value=str(values[10]))
+
+with col2:
+    APQ5 = st.text_input("Shimmer:APQ5", value=str(values[11]))
+
+with col3:
+    APQ = st.text_input("MDVP:APQ", value=str(values[12]))
+
+with col4:
+    DDA = st.text_input("Shimmer:DDA", value=str(values[13]))
+
+with col5:
+    NHR = st.text_input("NHR", value=str(values[14]))
+
+with col1:
+    HNR = st.text_input("HNR", value=str(values[15]))
+
+with col2:
+    RPDE = st.text_input("RPDE", value=str(values[16]))
+
+with col3:
+    DFA = st.text_input("DFA", value=str(values[17]))
+
+with col4:
+    spread1 = st.text_input("spread1", value=str(values[18]))
+
+with col5:
+    spread2 = st.text_input("spread2", value=str(values[19]))
+
+with col1:
+    D2 = st.text_input("D2", value=str(values[20]))
+
+with col2:
+    PPE = st.text_input("PPE", value=str(values[21]))
   
-    col1, col2, col3, col4, col5 = st.columns(5)
-    
-    with col1:
-        fo = st.text_input("MDVP:Fo(Hz)")
 
-    with col2:
-        fhi = st.text_input("MDVP:Fhi(Hz)")
-
-    with col3:
-        flo = st.text_input("MDVP:Flo(Hz)")
-
-    with col4:
-        Jitter_percent = st.text_input("MDVP:Jitter(%)")
-
-    with col5:
-        Jitter_Abs = st.text_input("MDVP:Jitter(Abs)")
-
-    with col1:
-        RAP = st.text_input("MDVP:RAP")
-
-    with col2:
-        PPQ = st.text_input("MDVP:PPQ")
-
-    with col3:
-        DDP = st.text_input("Jitter:DDP")
-
-    with col4:
-        Shimmer = st.text_input("MDVP:Shimmer")
-
-    with col5:
-        Shimmer_dB = st.text_input("MDVP:Shimmer(dB)")
-
-    with col1:
-        APQ3 = st.text_input("Shimmer:APQ3")
-
-    with col2:
-        APQ5 = st.text_input("Shimmer:APQ5")
-
-    with col3:
-        APQ = st.text_input("MDVP:APQ")
-
-    with col4:
-        DDA = st.text_input("Shimmer:DDA")
-
-    with col5:
-        NHR = st.text_input("NHR")
-
-    with col1:
-        HNR = st.text_input("HNR")
-
-    with col2:
-        RPDE = st.text_input("RPDE")
-
-    with col3:
-        DFA = st.text_input("DFA")
-
-    with col4:
-        spread1 = st.text_input("spread1")
-
-    with col5:
-        spread2 = st.text_input("spread2")
-
-    with col1:
-        D2 = st.text_input("D2")
-
-    with col2:
-        PPE = st.text_input("PPE")
 
     # Code for Prediction
     if st.button("Parkinson's Test Result"):
@@ -448,9 +450,10 @@ if selected == 'Breast Cancer Prediction':
         'worst concave points', 'worst symmetry', 'worst fractal dimension'
     ]
     
+    
     user_input = []
 
-    for i, label in enumerate(input_labels):
+    for i, (label, default) in enumerate(zip(input_labels, default_values)):
         if i % 5 == 0:
             col = col1
         elif i % 5 == 1:
@@ -463,7 +466,7 @@ if selected == 'Breast Cancer Prediction':
             col = col5
         
         with col:
-            user_input.append(col.text_input(label))
+            user_input.append(col.text_input(label, value=str(values[i])))
 
     # Prediction
     if st.button("Breast Cancer Test Result"):
@@ -477,6 +480,5 @@ if selected == 'Breast Cancer Prediction':
                 display_result('The tumor is Benign (Non-Cancerous)', False)
         except Exception as e:
             st.error(f"Error in Breast Cancer Prediction: {e}")
-
           
 
