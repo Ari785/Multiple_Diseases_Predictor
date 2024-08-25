@@ -341,7 +341,7 @@ if selected == "Parkinson Prediction":
 if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
     with st.expander("Learn more about the features used in the prediction"):
-    st.write("""
+         st.write("""
     ### Mean Features:
     - **Mean Radius**: The average distance from the center to points on the perimeter of the cell nuclei.
     - **Mean Texture**: The standard deviation of gray-scale values, representing the variation in texture within the nuclei.
