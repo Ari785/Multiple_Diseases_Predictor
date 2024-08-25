@@ -199,17 +199,15 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
-    # Text area for bulk input
-    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
-   
-  # Default values for demonstration
-    num_values = 13  # Total number of inputs for Heart Diseases Prediction
-    default_values = ['0'] * num_values
-    
-  # Initialize input fields
-    values = default_values
-    if bulk_input:
-        values = parse_bulk_input(bulk_input, num_values)
+      # Number of input fields
+num_values = 13  # Adjust based on the number of inputs
+
+# Initialize input fields
+values = default_values
+bulk_input = st.text_area("Paste bulk input here (comma-separated)", "")
+
+if bulk_input:
+    values = parse_bulk_input(bulk_input, num_values)
 
 # Input fields in 3 columns
 col1, col2, col3 = st.columns(3)
@@ -252,7 +250,7 @@ with col3:
 
 with col1:
     thal = st.text_input('thal', value=str(values[12]))
-
+ 
   
 
 
