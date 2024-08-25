@@ -150,7 +150,7 @@ if selected == 'Diabetes Prediction':
 
             diab_prediction = diabetes_model.predict([user_input])
 
-            if diab_prediction[0] == 1:
+            if diab_prediction[0] == 0:
                 display_result('The person is diabetic', True)
             else:
                 display_result('The person is not diabetic', False)
@@ -247,7 +247,7 @@ if selected == 'Heart Diseases Prediction':
 
             heart_diagnosis = heart_disease_model.predict([user_input])
 
-            if heart_diagnosis[0] == 1:
+            if heart_diagnosis[0] == 0:
                 display_result('The person is having heart disease', True)
             else:
                 display_result('The person does not have any heart disease', False)
@@ -367,7 +367,7 @@ if selected == "Parkinson Prediction":
 
             parkinsons_prediction = parkinsons_model.predict([user_input])
 
-            if parkinsons_prediction[0] == 1:
+            if parkinsons_prediction[0] == 0:
                 display_result("The person has Parkinson's disease", True)
             else:
                 display_result("The person does not have Parkinson's disease", False)
@@ -476,7 +476,7 @@ if selected == 'Breast Cancer Prediction':
 
             cancer_prediction = breast_cancer_model.predict([user_input])
 
-            if cancer_prediction[0] == 1:
+            if cancer_prediction[0] == 0:
                 display_result('The tumor is malignant', True)
             else:
                 display_result('The tumor is benign', False)
