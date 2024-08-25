@@ -84,15 +84,15 @@ def display_result(message, is_positive):
         """, unsafe_allow_html=True)
 
 
-def parse_bulk_input(bulk_input):
+def parse_bulk_input(bulk_input, num_values):
     try:
         values = [float(x) for x in bulk_input.split(',')]
-        if len(values) != 8:
-            raise ValueError("Incorrect number of values provided.")
+        if len(values) != num_values:
+            raise ValueError(f"Incorrect number of values provided. Expected {num_values}, got {len(values)}.")
         return values
     except ValueError as e:
         st.error(f"Error parsing bulk input: {e}")
-        return [None] * 8
+        return [None] * num_values
 
 if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction')
@@ -114,12 +114,15 @@ if selected == 'Diabetes Prediction':
     bulk_input = st.text_area("Paste all inputs here (comma-separated):")
 
     # Default values for demonstration
-    default_values = ['0', '0', '0', '0', '0', '0', '0', '0']
+    # Default values for demonstration
+    num_values = 8  # Total number of inputs for Diabetic Prediction
+    default_values = ['0'] * num_values
 
     # Initialize input fields
     values = default_values
     if bulk_input:
-        values = parse_bulk_input(bulk_input)
+        values = parse_bulk_input(bulk_input, num_values)
+      
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -196,6 +199,17 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
+    # Text area for bulk input
+    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+   
+  # Default values for demonstration
+    num_values = 13  # Total number of inputs for Heart Diseases Prediction
+    default_values = ['0'] * num_values
+    
+  # Initialize input fields
+    values = default_values
+    if bulk_input:
+        values = parse_bulk_input(bulk_input, num_values)
   
     col1, col2, col3 = st.columns(3)
 
@@ -272,6 +286,17 @@ if selected == "Parkinson Prediction":
         """)
       
     
+    # Text area for bulk input
+    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+  
+    # Default values for demonstration
+    num_values = 22  # Total number of inputs for Parkinsons Prediction
+    default_values = ['0'] * num_values
+    
+  # Initialize input fields
+    values = default_values
+    if bulk_input:
+        values = parse_bulk_input(bulk_input, num_values)
   
     col1, col2, col3, col4, col5 = st.columns(5)
     
@@ -397,7 +422,18 @@ if selected == 'Breast Cancer Prediction':
     - **Worst Symmetry**: The largest asymmetry observed.
     - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
     """)
-      
+    # Text area for bulk input
+    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+  
+    # Default values for demonstration
+    num_values = 30  # Total number of inputs for Breast Cancer Prediction
+    default_values = ['0'] * num_values
+    
+  # Initialize input fields
+    values = default_values
+    if bulk_input:
+        values = parse_bulk_input(bulk_input, num_values)
+  
     # Input fields in 5 columns
     col1, col2, col3, col4, col5 = st.columns(5)
 
