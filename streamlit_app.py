@@ -376,62 +376,25 @@ if selected == 'Breast Cancer Prediction':
         - **worst fractal dimension**
         """)
 
-    # Create columns
-    col1, col2, col3, col4, col5 = st.columns(5)
+    # Input fields
+    input_fields = ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness',
+                    'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry',
+                    'mean fractal dimension', 'radius error', 'texture error', 'perimeter error',
+                    'area error', 'smoothness error', 'compactness error', 'concavity error',
+                    'concave points error', 'symmetry error', 'fractal dimension error',
+                    'worst radius', 'worst texture', 'worst perimeter', 'worst area',
+                    'worst smoothness', 'worst compactness', 'worst concavity',
+                    'worst concave points', 'worst symmetry', 'worst fractal dimension']
 
-    # Input fields in columns
-    with col1:
-        mean_radius = st.text_input("Mean Radius")
-        mean_texture = st.text_input("Mean Texture")
-        mean_compactness = st.text_input("Mean Compactness")
-        radius_error = st.text_input("Radius Error")
-        worst_radius = st.text_input("Worst Radius")
+    user_input = []
 
-    with col2:
-        mean_perimeter = st.text_input("Mean Perimeter")
-        mean_area = st.text_input("Mean Area")
-        mean_concavity = st.text_input("Mean Concavity")
-        texture_error = st.text_input("Texture Error")
-        worst_texture = st.text_input("Worst Texture")
-
-    with col3:
-        mean_smoothness = st.text_input("Mean Smoothness")
-        mean_concave_points = st.text_input("Mean Concave Points")
-        mean_symmetry = st.text_input("Mean Symmetry")
-        perimeter_error = st.text_input("Perimeter Error")
-        worst_perimeter = st.text_input("Worst Perimeter")
-
-    with col4:
-        mean_fractal_dimension = st.text_input("Mean Fractal Dimension")
-        radius_error = st.text_input("Radius Error")
-        area_error = st.text_input("Area Error")
-        smoothness_error = st.text_input("Smoothness Error")
-        worst_area = st.text_input("Worst Area")
-
-    with col5:
-        compactness_error = st.text_input("Compactness Error")
-        concavity_error = st.text_input("Concavity Error")
-        concave_points_error = st.text_input("Concave Points Error")
-        symmetry_error = st.text_input("Symmetry Error")
-        worst_smoothness = st.text_input("Worst Smoothness")
+    for field in input_fields:
+        user_input.append(st.text_input(field))
 
     # Prediction
     if st.button("Breast Cancer Test Result"):
         try:
-            # Collecting all user inputs into a list
-            user_input = [
-                float(mean_radius), float(mean_texture), float(mean_perimeter),
-                float(mean_area), float(mean_smoothness), float(mean_compactness),
-                float(mean_concavity), float(mean_concave_points), float(mean_symmetry),
-                float(mean_fractal_dimension), float(radius_error), float(texture_error),
-                float(perimeter_error), float(area_error), float(smoothness_error),
-                float(compactness_error), float(concavity_error), float(concave_points_error),
-                float(symmetry_error), float(worst_radius), float(worst_texture),
-                float(worst_perimeter), float(worst_area), float(worst_smoothness),
-                float(worst_compactness), float(worst_concavity), float(worst_concave_points),
-                float(worst_symmetry), float(worst_fractal_dimension)
-            ]
-            
+            user_input = [float(x) for x in user_input]
             breast_cancer_prediction = breast_cancer_model.predict([user_input])
 
             if breast_cancer_prediction[0] == 1:
@@ -439,4 +402,4 @@ if selected == 'Breast Cancer Prediction':
             else:
                 display_result('The tumor is Benign (Non-Cancerous)', False)
         except Exception as e:
-            st.error(f"Error in Breast Cancer Prediction: {e}")
+            st.error(f"Error in Breast Cancer Prediction: {e}")  
