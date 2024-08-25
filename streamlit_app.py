@@ -199,21 +199,6 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
-      import streamlit as st
-
-# Example default values (adjust based on your needs)
-default_values = [0, 0, 0, 120, 200, 0, 0, 150, 0, 0.0, 0, 0, 0]  # Length should match the number of fields
-
-def parse_bulk_input(bulk_input, num_values):
-    try:
-        values = [float(x) for x in bulk_input.split(',')]
-        if len(values) != num_values:
-            raise ValueError("Incorrect number of values provided.")
-        return values
-    except ValueError as e:
-        st.error(f"Error parsing bulk input: {e}")
-        return [0] * num_values  # Return default or empty values on error
-
 # Number of input fields
 num_values = 13  # Adjust based on the number of inputs
 
