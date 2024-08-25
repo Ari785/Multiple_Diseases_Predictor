@@ -376,20 +376,36 @@ if selected == 'Breast Cancer Prediction':
         - **worst fractal dimension**
         """)
 
-    # Input fields
-    input_fields = ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness',
-                    'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry',
-                    'mean fractal dimension', 'radius error', 'texture error', 'perimeter error',
-                    'area error', 'smoothness error', 'compactness error', 'concavity error',
-                    'concave points error', 'symmetry error', 'fractal dimension error',
-                    'worst radius', 'worst texture', 'worst perimeter', 'worst area',
-                    'worst smoothness', 'worst compactness', 'worst concavity',
-                    'worst concave points', 'worst symmetry', 'worst fractal dimension']
+    # Input fields in 5 columns
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    input_labels = [
+        'mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness',
+        'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry',
+        'mean fractal dimension', 'radius error', 'texture error', 'perimeter error',
+        'area error', 'smoothness error', 'compactness error', 'concavity error',
+        'concave points error', 'symmetry error', 'fractal dimension error',
+        'worst radius', 'worst texture', 'worst perimeter', 'worst area',
+        'worst smoothness', 'worst compactness', 'worst concavity',
+        'worst concave points', 'worst symmetry', 'worst fractal dimension'
+    ]
 
     user_input = []
 
-    for field in input_fields:
-        user_input.append(st.text_input(field))
+    for i, label in enumerate(input_labels):
+        if i % 5 == 0:
+            col = col1
+        elif i % 5 == 1:
+            col = col2
+        elif i % 5 == 2:
+            col = col3
+        elif i % 5 == 3:
+            col = col4
+        else:
+            col = col5
+        
+        with col:
+            user_input.append(col.text_input(label))
 
     # Prediction
     if st.button("Breast Cancer Test Result"):
@@ -402,4 +418,4 @@ if selected == 'Breast Cancer Prediction':
             else:
                 display_result('The tumor is Benign (Non-Cancerous)', False)
         except Exception as e:
-            st.error(f"Error in Breast Cancer Prediction: {e}")  
+            st.error(f"Error in Breast Cancer Prediction: {e}")
