@@ -83,42 +83,17 @@ def display_result(message, is_positive):
             </div>
         """, unsafe_allow_html=True)
 
-def parse_bulk_input(bulk_input, num_values):
+
+def parse_bulk_input(bulk_input):
     try:
         values = [float(x) for x in bulk_input.split(',')]
-        if len(values) != num_values:
-            raise ValueError(f"Incorrect number of values provided. Expected {num_values}, got {len(values)}.")
+        if len(values) != 8:
+            raise ValueError("Incorrect number of values provided.")
         return values
     except ValueError as e:
         st.error(f"Error parsing bulk input: {e}")
-        return [None] * num_values
-# Function to handle the bulk input and prediction for each disease
-def handle_prediction(num_values, prediction_function, input_labels):
-    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+        return [None] * 8
 
-    # Initialize default values for demonstration
-    default_values = ['0'] * num_values
-
-    values = default_values
-    if bulk_input:
-        values = parse_bulk_input(bulk_input, num_values)
-    
-    cols = st.columns(len(input_labels))
-    user_inputs = []
-    for i, (label, default) in enumerate(zip(input_labels, default_values)):
-        with cols[i]:
-            user_input = st.text_input(label, value=str(values[i]))
-            user_inputs.append(float(user_input))
-    
-    if st.button('Test Result'):
-        try:
-            prediction = prediction_function.predict([user_inputs])
-            if prediction[0] == 1:
-                display_result('The person is affected', True)
-            else:
-                display_result('The person is not affected', False)
-        except Exception as e:
-            st.error(f"Error in prediction: {e}")
 if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction')
 
@@ -135,8 +110,16 @@ if selected == 'Diabetes Prediction':
         - **Age**: Age of the person in years.
         """)
 
-    handle_prediction(8, diabetes_model, input_labels)
-    
+    # Text area for bulk input
+    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
+
+    # Default values for demonstration
+    default_values = ['0', '0', '0', '0', '0', '0', '0', '0']
+
+    # Initialize input fields
+    values = default_values
+    if bulk_input:
+        values = parse_bulk_input(bulk_input)
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -213,8 +196,6 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
-      
-    handle_prediction(13, heart_disease_model, input_labels)
   
     col1, col2, col3 = st.columns(3)
 
@@ -290,7 +271,7 @@ if selected == "Parkinson Prediction":
         - **spread1**, **spread2**, **PPE**: Nonlinear measures of fundamental frequency variation.
         """)
       
-    handle_prediction(22, parkinsons_model, input_labels)
+    
   
     col1, col2, col3, col4, col5 = st.columns(5)
     
@@ -417,7 +398,6 @@ if selected == 'Breast Cancer Prediction':
     - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
     """)
       
-    handle_prediction(30, breast_cancer_model, input_labels)
     # Input fields in 5 columns
     col1, col2, col3, col4, col5 = st.columns(5)
 
