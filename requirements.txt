@@ -1,4 +1,5 @@
-streamlit
+streamlit==1.27.2
+setuptools
 streamlit_option_menu
 scikit-learn
 pandas
