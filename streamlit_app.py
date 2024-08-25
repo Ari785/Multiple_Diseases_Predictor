@@ -62,7 +62,8 @@ with st.sidebar:
                            menu_icon='hospital-fill',
                            icons=['activity', 'heart', 'person','virus'],
                            default_index=0)
-  st.write("""😎Developed by Aritra Sarkar""")
+  
+    st.write("😎Developed by Aritra Sarkar")
 
 # Helper function to display the result
 def display_result(message, is_positive):
