@@ -199,8 +199,21 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
+# Example default values (adjust as necessary)
+default_values = [0] * 13  # Initialize with 13 default values
+
+def parse_bulk_input(bulk_input, num_values):
+    try:
+        values = [float(x) for x in bulk_input.split(',')]
+        if len(values) != num_values:
+            raise ValueError("Incorrect number of values provided.")
+        return values
+    except ValueError as e:
+        st.error(f"Error parsing bulk input: {e}")
+        return [0] * num_values  # Return a list with default values on error
+
 # Number of input fields
-num_values = 13  # Adjust based on the number of inputs
+num_values = 13
 
 # Initialize input fields
 values = default_values
@@ -208,6 +221,11 @@ bulk_input = st.text_area("Paste bulk input here (comma-separated)", "")
 
 if bulk_input:
     values = parse_bulk_input(bulk_input, num_values)
+
+# Ensure `values` has exactly 13 elements
+if len(values) != num_values:
+    st.error(f"Expected {num_values} values but got {len(values)}.")
+    values = default_values  # Fallback to default values if the length is incorrect
 
 # Input fields in 3 columns
 col1, col2, col3 = st.columns(3)
@@ -250,10 +268,6 @@ with col3:
 
 with col1:
     thal = st.text_input('thal', value=str(values[12]))
-
-
-  
-
 
     # Code for Prediction
     if st.button('Heart Disease Test Result'):
