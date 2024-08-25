@@ -135,8 +135,7 @@ if selected == 'Diabetes Prediction':
         - **Diabetes Pedigree Function**: A function that scores the likelihood of diabetes based on family history.
         - **Age**: Age of the person in years.
         """)
-
-   handle_prediction(8, diabetes_model, input_labels)
+      handle_prediction(8, diabetes_model, input_labels)
     
     col1, col2, col3 = st.columns(3)
 
