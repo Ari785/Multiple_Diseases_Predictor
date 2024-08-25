@@ -1,7 +1,8 @@
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
-
+import sys
+print(f"Python version: {sys.version}")
 # Set page configuration
 st.set_page_config(page_title="Diseases predictor",
                    layout="wide",
