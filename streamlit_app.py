@@ -341,40 +341,45 @@ if selected == "Parkinson Prediction":
 if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
 
-    with st.expander("Click for Input Information"):
-        st.write("""
-        **Input Information:**
-        - **mean radius**
-        - **mean texture**
-        - **mean perimeter**
-        - **mean area**
-        - **mean smoothness**
-        - **mean compactness**
-        - **mean concavity**
-        - **mean concave points**
-        - **mean symmetry**
-        - **mean fractal dimension**
-        - **radius error**
-        - **texture error**
-        - **perimeter error**
-        - **area error**
-        - **smoothness error**
-        - **compactness error**
-        - **concavity error**
-        - **concave points error**
-        - **symmetry error**
-        - **fractal dimension error**
-        - **worst radius**
-        - **worst texture**
-        - **worst perimeter**
-        - **worst area**
-        - **worst smoothness**
-        - **worst compactness**
-        - **worst concavity**
-        - **worst concave points**
-        - **worst symmetry**
-        - **worst fractal dimension**
-        """)
+with st.expander("Learn more about the features used in the prediction"):
+    st.write("""
+    ### Mean Features:
+    - **Mean Radius**: The average distance from the center to points on the perimeter of the cell nuclei.
+    - **Mean Texture**: The standard deviation of gray-scale values, representing the variation in texture within the nuclei.
+    - **Mean Perimeter**: The average perimeter of the nuclei.
+    - **Mean Area**: The average area of the nuclei.
+    - **Mean Smoothness**: The mean of local variation in radius lengths, indicating how smooth the nuclear boundary is.
+    - **Mean Compactness**: Calculated as the perimeter squared divided by the area minus 1, representing the compactness of the nuclei.
+    - **Mean Concavity**: The average extent of concave portions of the nuclear contour.
+    - **Mean Concave Points**: The number of concave portions in the nuclear contour.
+    - **Mean Symmetry**: How symmetric the nuclei are in shape.
+    - **Mean Fractal Dimension**: The “coastline approximation” or roughness of the nuclear boundary.
+
+    ### Error Features (Measurement Error):
+    - **Radius Error**: The standard deviation of the radius measurement.
+    - **Texture Error**: The standard deviation of the texture measurement.
+    - **Perimeter Error**: The standard deviation of the perimeter measurement.
+    - **Area Error**: The standard deviation of the area measurement.
+    - **Smoothness Error**: The standard deviation of the smoothness measurement.
+    - **Compactness Error**: The standard deviation of the compactness measurement.
+    - **Concavity Error**: The standard deviation of the concavity measurement.
+    - **Concave Points Error**: The standard deviation of the concave points measurement.
+    - **Symmetry Error**: The standard deviation of the symmetry measurement.
+    - **Fractal Dimension Error**: The standard deviation of the fractal dimension measurement.
+
+    ### Worst Features:
+    - **Worst Radius**: The largest distance from the center to points on the perimeter.
+    - **Worst Texture**: The largest standard deviation of gray-scale values.
+    - **Worst Perimeter**: The largest perimeter observed.
+    - **Worst Area**: The largest area observed.
+    - **Worst Smoothness**: The largest deviation in smoothness.
+    - **Worst Compactness**: The highest compactness observed.
+    - **Worst Concavity**: The largest extent of concave portions of the nuclear contour.
+    - **Worst Concave Points**: The maximum number of concave portions in the nuclear contour.
+    - **Worst Symmetry**: The largest asymmetry observed.
+    - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
+    """)
+
 
     # Input fields in 5 columns
     col1, col2, col3, col4, col5 = st.columns(5)
