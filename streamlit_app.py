@@ -1,11 +1,11 @@
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
+
 # Set page configuration
-st.set_page_config(page_title="Diseases predictor",
+st.set_page_config(page_title="Diseases Predictor",
                    layout="wide",
                    page_icon="🧑‍⚕️")
-
 
 st.markdown(
     """
@@ -43,17 +43,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
-
-
 # Load the saved models
 try:
     diabetes_model = pickle.load(open("saved models/diabetes_model.sav", 'rb'))
     heart_disease_model = pickle.load(open("saved models/heart_disease_model.sav", 'rb'))
     parkinsons_model = pickle.load(open("saved models/parkinsons_model.sav", 'rb'))
     breast_cancer_model = pickle.load(open("saved models/breast_cancer_model.sav",'rb'))
-    
-    
 except Exception as e:
     st.error(f"Error loading models: {e}")
 
@@ -63,9 +58,9 @@ with st.sidebar:
                            ['Diabetes Prediction',
                             'Heart Diseases Prediction',
                             'Parkinson Prediction',
-                           'Breast Cancer Prediction'],
+                            'Breast Cancer Prediction'],
                            menu_icon='hospital-fill',
-                           icons=['activity', 'heart', 'person','virus'],
+                           icons=['activity', 'heart', 'person','person'],
                            default_index=0)
 
 # Helper function to display the result
@@ -83,20 +78,20 @@ def display_result(message, is_positive):
             </div>
         """, unsafe_allow_html=True)
 
+# Function to automatically fill inputs from bulk text
+def auto_fill_inputs(input_data, num_inputs):
+    input_data = input_data.strip().split()
+    if len(input_data) == num_inputs:
+        return input_data
+    else:
+        st.error(f"Expected {num_inputs} inputs, but got {len(input_data)}. Please ensure you provide exactly {num_inputs} space-separated values.")
+        return [""] * num_inputs
 
-def parse_bulk_input(bulk_input, num_values):
-    try:
-        values = [float(x) for x in bulk_input.split(',')]
-        if len(values) != num_values:
-            raise ValueError(f"Incorrect number of values provided. Expected {num_values}, got {len(values)}.")
-        return values
-    except ValueError as e:
-        st.error(f"Error parsing bulk input: {e}")
-        return [None] * num_values
-
+# Diabetes Prediction Page
 if selected == 'Diabetes Prediction':
+    
     st.title('Diabetes Prediction')
-
+    
     with st.expander("Learn more about the input features"):
         st.write("""
         **Input Information:**
@@ -110,44 +105,37 @@ if selected == 'Diabetes Prediction':
         - **Age**: Age of the person in years.
         """)
 
-    # Text area for bulk input
-    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
-
-    # Default values for demonstration
-    # Default values for demonstration
-    num_values = 8  # Total number of inputs for Diabetic Prediction
-    default_values = ['0'] * num_values
-
-    # Initialize input fields
-    values = default_values
+    bulk_input = st.text_area("Paste all inputs here (space-separated values):", "")
     if bulk_input:
-        values = parse_bulk_input(bulk_input, num_values)
-      
+        inputs = auto_fill_inputs(bulk_input, 8)
+    else:
+        inputs = [""] * 8
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        Pregnancies = st.text_input('Number of Pregnancies', value=str(values[0]))
+        Pregnancies = st.text_input('Number of Pregnancies', inputs[0])
 
     with col2:
-        Glucose = st.text_input('Glucose Level', value=str(values[1]))
+        Glucose = st.text_input('Glucose Level', inputs[1])
 
     with col3:
-        BloodPressure = st.text_input('Blood Pressure value', value=str(values[2]))
+        BloodPressure = st.text_input('Blood Pressure value', inputs[2])
 
     with col1:
-        SkinThickness = st.text_input('Skin Thickness value', value=str(values[3]))
+        SkinThickness = st.text_input('Skin Thickness value', inputs[3])
 
     with col2:
-        Insulin = st.text_input('Insulin Level', value=str(values[4]))
+        Insulin = st.text_input('Insulin Level', inputs[4])
 
     with col3:
-        BMI = st.text_input('BMI value', value=str(values[5]))
+        BMI = st.text_input('BMI value', inputs[5])
 
     with col1:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value', value=str(values[6]))
+        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value', inputs[6])
 
     with col2:
-        Age = st.text_input('Age of the Person', value=str(values[7]))
+        Age = st.text_input('Age of the Person', inputs[7])
 
     # Code for Prediction
     if st.button('Diabetes Test Result'):
@@ -199,75 +187,53 @@ if selected == 'Heart Diseases Prediction':
          - 2 = fixed defect 
          - 3 = reversible defect.
        """)
-# Example default values (adjust as necessary)
-default_values = [0] * 13  # Initialize with 13 default values
 
-def parse_bulk_input(bulk_input, num_values):
-    try:
-        values = [float(x) for x in bulk_input.split(',')]
-        if len(values) != num_values:
-            raise ValueError("Incorrect number of values provided.")
-        return values
-    except ValueError as e:
-        st.error(f"Error parsing bulk input: {e}")
-        return [0] * num_values  # Return a list with default values on error
+    bulk_input = st.text_area("Paste all inputs here (space-separated values):", "")
+    if bulk_input:
+        inputs = auto_fill_inputs(bulk_input, 13)
+    else:
+        inputs = [""] * 13
 
-# Number of input fields
-num_values = 13
+    col1, col2, col3 = st.columns(3)
 
-# Initialize input fields
-values = default_values
-bulk_input = st.text_area("Paste bulk input here (comma-separated)", "")
+    with col1:
+        age = st.text_input('Age', inputs[0])
 
-if bulk_input:
-    values = parse_bulk_input(bulk_input, num_values)
+    with col2:
+        sex = st.text_input('Sex', inputs[1])
 
-# Ensure `values` has exactly 13 elements
-if len(values) != num_values:
-    st.error(f"Expected {num_values} values but got {len(values)}.")
-    values = default_values  # Fallback to default values if the length is incorrect
+    with col3:
+        cp = st.text_input('Chest Pain types', inputs[2])
 
-# Input fields in 3 columns
-col1, col2, col3 = st.columns(3)
+    with col1:
+        trestbps = st.text_input('Resting Blood Pressure', inputs[3])
 
-with col1:
-    age = st.text_input('Age', value=str(values[0]))
+    with col2:
+        chol = st.text_input('Serum Cholesterol in mg/dl', inputs[4])
 
-with col2:
-    sex = st.text_input('Sex', value=str(values[1]))
+    with col3:
+        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl', inputs[5])
 
-with col3:
-    cp = st.text_input('Chest Pain types', value=str(values[2]))
+    with col1:
+        restecg = st.text_input('Resting Electrocardiographic results', inputs[6])
 
-with col1:
-    trestbps = st.text_input('Resting Blood Pressure', value=str(values[3]))
+    with col2:
+        thalach = st.text_input('Maximum Heart Rate achieved', inputs[7])
 
-with col2:
-    chol = st.text_input('Serum Cholestoral in mg/dl', value=str(values[4]))
+    with col3:
+        exang = st.text_input('Exercise Induced Angina', inputs[8])
 
-with col3:
-    fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl', value=str(values[5]))
+    with col1:
+        oldpeak = st.text_input('ST depression induced by exercise', inputs[9])
 
-with col1:
-    restecg = st.text_input('Resting Electrocardiographic results', value=str(values[6]))
+    with col2:
+        slope = st.text_input('Slope of the peak exercise ST segment', inputs[10])
 
-with col2:
-    thalach = st.text_input('Maximum Heart Rate achieved', value=str(values[7]))
+    with col3:
+        ca = st.text_input('Major vessels colored by flourosopy', inputs[11])
 
-with col3:
-    exang = st.text_input('Exercise Induced Angina', value=str(values[8]))
-
-with col1:
-    oldpeak = st.text_input('ST depression induced by exercise', value=str(values[9]))
-
-with col2:
-    slope = st.text_input('Slope of the peak exercise ST segment', value=str(values[10]))
-
-with col3:
-    ca = st.text_input('Major vessels colored by fluoroscopy', value=str(values[11]))
-
-with col1:
-    thal = st.text_input('thal', value=str(values[12]))
+    with col1:
+        thal = st.text_input('thal', inputs[12])
 
     # Code for Prediction
     if st.button('Heart Disease Test Result'):
@@ -275,122 +241,124 @@ with col1:
             user_input = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
             user_input = [float(x) for x in user_input]
 
-            heart_prediction = heart_disease_model.predict([user_input])
+            heart_diagnosis = heart_disease_model.predict([user_input])
 
-            if heart_prediction[0] == 1:
+            if heart_diagnosis[0] == 1:
                 display_result('The person is having heart disease', True)
             else:
                 display_result('The person does not have any heart disease', False)
         except Exception as e:
             st.error(f"Error in Heart Disease Prediction: {e}")
-    
+
 # Parkinson's Prediction Page
 if selected == "Parkinson Prediction":
     st.title("Parkinson's Disease Prediction")
-    
+
     with st.expander("Learn more about the input features"):
-        st.write("""
-        **Input Information:**
-        - **MDVP:Fo(Hz)**: Average vocal fundamental frequency.
-        - **MDVP:Fhi(Hz)**: Maximum vocal fundamental frequency.
-        - **MDVP:Flo(Hz)**: Minimum vocal fundamental frequency.
-        - **MDVP:Jitter(%)**, **MDVP:Jitter(Abs)**, **MDVP:RAP**, **MDVP:PPQ**, **Jitter:DDP**: Measures of variation in fundamental frequency.
-        - **MDVP:Shimmer**, **MDVP:Shimmer(dB)**, **Shimmer:APQ3**, **Shimmer:APQ5**, **MDVP:APQ**, **Shimmer:DDA**: Measures of variation in amplitude.
-        - **NHR**, **HNR**: Measures of ratio of noise to tonal components in the voice.
-        - **RPDE**, **D2**: Nonlinear dynamical complexity measures.
-        - **DFA**: Signal fractal scaling exponent.
-        - **spread1**, **spread2**, **PPE**: Nonlinear measures of fundamental frequency variation.
-        """)
-      
-    
-    # Text area for bulk input
-    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
-  
-    # Default values for demonstration
-    num_values = 22  # Total number of inputs for Parkinsons Prediction
-    default_values = ['0'] * num_values
-    
-  # Initialize input fields
-    values = default_values
+       st.write("""
+       **Input Information:**
+       - **MDVP:Fo(Hz)**: Average vocal fundamental frequency.
+       - **MDVP:Fhi(Hz)**: Maximum vocal fundamental frequency.
+       - **MDVP:Flo(Hz)**: Minimum vocal fundamental frequency.
+       - **MDVP:Jitter(%)**: Variation in fundamental frequency.
+       - **MDVP:Jitter(Abs)**: Variation in fundamental frequency (in absolute value).
+       - **MDVP:RAP**: Variation in fundamental frequency.
+       - **MDVP:PPQ**: Variation in fundamental frequency.
+       - **Jitter:DDP**: Variation in fundamental frequency.
+       - **MDVP:Shimmer**: Variation in amplitude.
+       - **MDVP:Shimmer(dB)**: Variation in amplitude.
+       - **Shimmer:APQ3**: Variation in amplitude.
+       - **Shimmer:APQ5**: Variation in amplitude.
+       - **MDVP:APQ**: Variation in amplitude.
+       - **Shimmer:DDA**: Variation in amplitude.
+       - **NHR**: Ratio of noise to tonal components in the voice.
+       - **HNR**: Ratio of noise to tonal components in the voice.
+       - **RPDE**: Nonlinear dynamical complexity measure.
+       - **DFA**: Signal fractal scaling exponent.
+       - **spread1**: Nonlinear measure of fundamental frequency variation.
+       - **spread2**: Nonlinear measure of fundamental frequency variation.
+       - **D2**: Nonlinear measure of fundamental frequency variation.
+       - **PPE**: Nonlinear measure of fundamental frequency variation.
+       """)
+
+    bulk_input = st.text_area("Paste all inputs here (space-separated values):", "")
     if bulk_input:
-        values = parse_bulk_input(bulk_input, num_values)
+        inputs = auto_fill_inputs(bulk_input, 22)
+    else:
+        inputs = [""] * 22
 
-# Input fields in 5 columns
-col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3 = st.columns(3)
 
-with col1:
-    fo = st.text_input("MDVP:Fo(Hz)", value=str(values[0]))
+    with col1:
+        fo = st.text_input('MDVP:Fo(Hz)', inputs[0])
 
-with col2:
-    fhi = st.text_input("MDVP:Fhi(Hz)", value=str(values[1]))
+    with col2:
+        fhi = st.text_input('MDVP:Fhi(Hz)', inputs[1])
 
-with col3:
-    flo = st.text_input("MDVP:Flo(Hz)", value=str(values[2]))
+    with col3:
+        flo = st.text_input('MDVP:Flo(Hz)', inputs[2])
 
-with col4:
-    Jitter_percent = st.text_input("MDVP:Jitter(%)", value=str(values[3]))
+    with col1:
+        jitter_percent = st.text_input('MDVP:Jitter(%)', inputs[3])
 
-with col5:
-    Jitter_Abs = st.text_input("MDVP:Jitter(Abs)", value=str(values[4]))
+    with col2:
+        jitter_abs = st.text_input('MDVP:Jitter(Abs)', inputs[4])
 
-with col1:
-    RAP = st.text_input("MDVP:RAP", value=str(values[5]))
+    with col3:
+        rap = st.text_input('MDVP:RAP', inputs[5])
 
-with col2:
-    PPQ = st.text_input("MDVP:PPQ", value=str(values[6]))
+    with col1:
+        ppq = st.text_input('MDVP:PPQ', inputs[6])
 
-with col3:
-    DDP = st.text_input("Jitter:DDP", value=str(values[7]))
+    with col2:
+        ddp = st.text_input('Jitter:DDP', inputs[7])
 
-with col4:
-    Shimmer = st.text_input("MDVP:Shimmer", value=str(values[8]))
+    with col3:
+        shimmer = st.text_input('MDVP:Shimmer', inputs[8])
 
-with col5:
-    Shimmer_dB = st.text_input("MDVP:Shimmer(dB)", value=str(values[9]))
+    with col1:
+        shimmer_db = st.text_input('MDVP:Shimmer(dB)', inputs[9])
 
-with col1:
-    APQ3 = st.text_input("Shimmer:APQ3", value=str(values[10]))
+    with col2:
+        apq3 = st.text_input('Shimmer:APQ3', inputs[10])
 
-with col2:
-    APQ5 = st.text_input("Shimmer:APQ5", value=str(values[11]))
+    with col3:
+        apq5 = st.text_input('Shimmer:APQ5', inputs[11])
 
-with col3:
-    APQ = st.text_input("MDVP:APQ", value=str(values[12]))
+    with col1:
+        apq = st.text_input('MDVP:APQ', inputs[12])
 
-with col4:
-    DDA = st.text_input("Shimmer:DDA", value=str(values[13]))
+    with col2:
+        dda = st.text_input('Shimmer:DDA', inputs[13])
 
-with col5:
-    NHR = st.text_input("NHR", value=str(values[14]))
+    with col3:
+        nhr = st.text_input('NHR', inputs[14])
 
-with col1:
-    HNR = st.text_input("HNR", value=str(values[15]))
+    with col1:
+        hnr = st.text_input('HNR', inputs[15])
 
-with col2:
-    RPDE = st.text_input("RPDE", value=str(values[16]))
+    with col2:
+        rpde = st.text_input('RPDE', inputs[16])
 
-with col3:
-    DFA = st.text_input("DFA", value=str(values[17]))
+    with col3:
+        dfa = st.text_input('DFA', inputs[17])
 
-with col4:
-    spread1 = st.text_input("spread1", value=str(values[18]))
+    with col1:
+        spread1 = st.text_input('spread1', inputs[18])
 
-with col5:
-    spread2 = st.text_input("spread2", value=str(values[19]))
+    with col2:
+        spread2 = st.text_input('spread2', inputs[19])
 
-with col1:
-    D2 = st.text_input("D2", value=str(values[20]))
+    with col3:
+        d2 = st.text_input('D2', inputs[20])
 
-with col2:
-    PPE = st.text_input("PPE", value=str(values[21]))
-  
-
+    with col1:
+        ppe = st.text_input('PPE', inputs[21])
 
     # Code for Prediction
     if st.button("Parkinson's Test Result"):
         try:
-            user_input = [fo, fhi, flo, Jitter_percent, Jitter_Abs, RAP, PPQ, DDP, Shimmer,
-                          Shimmer_dB, APQ3, APQ5, APQ, DDA, NHR, HNR, RPDE, DFA, spread1, spread2, D2, PPE]
+            user_input = [fo, fhi, flo, jitter_percent, jitter_abs, rap, ppq, ddp, shimmer, shimmer_db, apq3, apq5, apq, dda, nhr, hnr, rpde, dfa, spread1, spread2, d2, ppe]
             user_input = [float(x) for x in user_input]
 
             parkinsons_prediction = parkinsons_model.predict([user_input])
@@ -401,102 +369,81 @@ with col2:
                 display_result("The person does not have Parkinson's disease", False)
         except Exception as e:
             st.error(f"Error in Parkinson's Prediction: {e}")
+
 # Breast Cancer Prediction Page
 if selected == 'Breast Cancer Prediction':
-    st.title("Breast Cancer Prediction")
+    
+    st.title('Breast Cancer Prediction')
+    
     with st.expander("Learn more about the input features"):
-         st.write("""
-    ### Mean Features:
-    - **Mean Radius**: The average distance from the center to points on the perimeter of the cell nuclei.
-    - **Mean Texture**: The standard deviation of gray-scale values, representing the variation in texture within the nuclei.
-    - **Mean Perimeter**: The average perimeter of the nuclei.
-    - **Mean Area**: The average area of the nuclei.
-    - **Mean Smoothness**: The mean of local variation in radius lengths, indicating how smooth the nuclear boundary is.
-    - **Mean Compactness**: Calculated as the perimeter squared divided by the area minus 1, representing the compactness of the nuclei.
-    - **Mean Concavity**: The average extent of concave portions of the nuclear contour.
-    - **Mean Concave Points**: The number of concave portions in the nuclear contour.
-    - **Mean Symmetry**: How symmetric the nuclei are in shape.
-    - **Mean Fractal Dimension**: The “coastline approximation” or roughness of the nuclear boundary.
+        st.write("""
+        **Input Information:**
+        - **Radius Mean**: Mean of distances from center to points on the perimeter.
+        - **Texture Mean**: Standard deviation of gray-scale values.
+        - **Perimeter Mean**: Mean size of the core tumor.
+        - **Area Mean**: Mean area of the tumor.
+        - **Smoothness Mean**: Mean of local variation in radius lengths.
+        - **Compactness Mean**: Mean of perimeter^2/ area - 1.0.
+        - **Concavity Mean**: Mean of severity of concave portions of the contour.
+        - **Concave Points Mean**: Mean of number of concave portions of the contour.
+        - **Symmetry Mean**: Mean symmetry.
+        - **Fractal Dimension Mean**: Mean for "coastline approximation" - 1.
+        """)
 
-    ### Error Features (Measurement Error):
-    - **Radius Error**: The standard deviation of the radius measurement.
-    - **Texture Error**: The standard deviation of the texture measurement.
-    - **Perimeter Error**: The standard deviation of the perimeter measurement.
-    - **Area Error**: The standard deviation of the area measurement.
-    - **Smoothness Error**: The standard deviation of the smoothness measurement.
-    - **Compactness Error**: The standard deviation of the compactness measurement.
-    - **Concavity Error**: The standard deviation of the concavity measurement.
-    - **Concave Points Error**: The standard deviation of the concave points measurement.
-    - **Symmetry Error**: The standard deviation of the symmetry measurement.
-    - **Fractal Dimension Error**: The standard deviation of the fractal dimension measurement.
-
-    ### Worst Features:
-    - **Worst Radius**: The largest distance from the center to points on the perimeter.
-    - **Worst Texture**: The largest standard deviation of gray-scale values.
-    - **Worst Perimeter**: The largest perimeter observed.
-    - **Worst Area**: The largest area observed.
-    - **Worst Smoothness**: The largest deviation in smoothness.
-    - **Worst Compactness**: The highest compactness observed.
-    - **Worst Concavity**: The largest extent of concave portions of the nuclear contour.
-    - **Worst Concave Points**: The maximum number of concave portions in the nuclear contour.
-    - **Worst Symmetry**: The largest asymmetry observed.
-    - **Worst Fractal Dimension**: The largest roughness of the nuclear boundary observed.
-    """)
-    # Text area for bulk input
-    bulk_input = st.text_area("Paste all inputs here (comma-separated):")
-  
-    # Default values for demonstration
-    num_values = 30  # Total number of inputs for Breast Cancer Prediction
-    default_values = ['0'] * num_values
-    
-  # Initialize input fields
-    values = default_values
+    bulk_input = st.text_area("Paste all inputs here (space-separated values):", "")
     if bulk_input:
-        values = parse_bulk_input(bulk_input, num_values)
-  
-    # Input fields in 5 columns
-    col1, col2, col3, col4, col5 = st.columns(5)
+        inputs = auto_fill_inputs(bulk_input, 10)
+    else:
+        inputs = [""] * 10
 
-    input_labels = [
-        'mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness',
-        'mean compactness', 'mean concavity', 'mean concave points', 'mean symmetry',
-        'mean fractal dimension', 'radius error', 'texture error', 'perimeter error',
-        'area error', 'smoothness error', 'compactness error', 'concavity error',
-        'concave points error', 'symmetry error', 'fractal dimension error',
-        'worst radius', 'worst texture', 'worst perimeter', 'worst area',
-        'worst smoothness', 'worst compactness', 'worst concavity',
-        'worst concave points', 'worst symmetry', 'worst fractal dimension'
-    ]
-    
-    
-    user_input = []
+    col1, col2, col3 = st.columns(3)
 
-    for i, (label, default) in enumerate(zip(input_labels, default_values)):
-        if i % 5 == 0:
-            col = col1
-        elif i % 5 == 1:
-            col = col2
-        elif i % 5 == 2:
-            col = col3
-        elif i % 5 == 3:
-            col = col4
-        else:
-            col = col5
-        
-        with col:
-            user_input.append(col.text_input(label, value=str(values[i])))
+    with col1:
+        radius_mean = st.text_input('Radius Mean', inputs[0])
 
-    # Prediction
-    if st.button("Breast Cancer Test Result"):
+    with col2:
+        texture_mean = st.text_input('Texture Mean', inputs[1])
+
+    with col3:
+        perimeter_mean = st.text_input('Perimeter Mean', inputs[2])
+
+    with col1:
+        area_mean = st.text_input('Area Mean', inputs[3])
+
+    with col2:
+        smoothness_mean = st.text_input('Smoothness Mean', inputs[4])
+
+    with col3:
+        compactness_mean = st.text_input('Compactness Mean', inputs[5])
+
+    with col1:
+        concavity_mean = st.text_input('Concavity Mean', inputs[6])
+
+    with col2:
+        concave_points_mean = st.text_input('Concave Points Mean', inputs[7])
+
+    with col3:
+        symmetry_mean = st.text_input('Symmetry Mean', inputs[8])
+
+    with col1:
+        fractal_dimension_mean = st.text_input('Fractal Dimension Mean', inputs[9])
+
+    # Code for Prediction
+    if st.button('Breast Cancer Test Result'):
         try:
+            user_input = [radius_mean, texture_mean, perimeter_mean, area_mean,
+                          smoothness_mean, compactness_mean, concavity_mean,
+                          concave_points_mean, symmetry_mean, fractal_dimension_mean]
             user_input = [float(x) for x in user_input]
-            breast_cancer_prediction = breast_cancer_model.predict([user_input])
 
-            if breast_cancer_prediction[0] == 0:
-                display_result('The tumor is Malignant (Cancerous)', True)
+            cancer_prediction = breast_cancer_model.predict([user_input])
+
+            if cancer_prediction[0] == 1:
+                display_result('The tumor is malignant', True)
             else:
-                display_result('The tumor is Benign (Non-Cancerous)', False)
+                display_result('The tumor is benign', False)
         except Exception as e:
             st.error(f"Error in Breast Cancer Prediction: {e}")
+
           
 
