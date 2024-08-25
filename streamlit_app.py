@@ -247,7 +247,7 @@ if selected == 'Heart Diseases Prediction':
 
             heart_diagnosis = heart_disease_model.predict([user_input])
 
-            if heart_diagnosis[0] == 0:
+            if heart_diagnosis[0] == 1:
                 display_result('The person is having heart disease', True)
             else:
                 display_result('The person does not have any heart disease', False)
