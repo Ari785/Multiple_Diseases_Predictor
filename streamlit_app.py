@@ -65,7 +65,7 @@ with st.sidebar:
                             'Parkinson Prediction',
                            'Breast Cancer Prediction'],
                            menu_icon='hospital-fill',
-                           icons=['activity', 'heart', 'person'],
+                           icons=['activity', 'heart', 'person','person'],
                            default_index=0)
 
 # Helper function to display the result
@@ -338,7 +338,7 @@ if selected == "Parkinson Prediction":
         except Exception as e:
             st.error(f"Error in Parkinson's Prediction: {e}")
 # Sidebar option for Breast Cancer Classification
-if selected == 'Breast Cancer Prediction':
+  if selected == 'Breast Cancer Prediction':
     st.title("Breast Cancer Prediction")
 
     with st.expander("Click for Input Information"):
