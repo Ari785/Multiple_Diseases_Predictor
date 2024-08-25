@@ -4,7 +4,5 @@ streamlit_option_menu
 scikit-learn
 pandas
 numpy
-tensorflow 
-keras
 svm
 
