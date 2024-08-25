@@ -99,7 +99,7 @@ def display_result(message, is_positive):
     else:
         st.markdown(f'<div style="color: green; font-size: 20px;">{message}</div>', unsafe_allow_html=True)
 
-selected = st.sidebar.radio("Select a prediction", ["Diabetes Prediction", "Heart Disease Prediction", "Parkinson's Disease Prediction", "Breast Cancer Prediction"])
+
 
 if selected == 'Diabetes Prediction':
     st.title('Diabetes Prediction')
