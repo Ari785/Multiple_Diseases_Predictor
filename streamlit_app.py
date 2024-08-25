@@ -7,6 +7,22 @@ st.set_page_config(page_title="Diseases predictor",
                    layout="wide",
                    page_icon="🧑‍⚕️")
 
+# CSS to set the background image
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://images.pexels.com/photos/6942015/pexels-photo-6942015.jpeg");
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+</style>
+'''
+
+# Display the CSS code
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
 
 st.markdown(
     """
